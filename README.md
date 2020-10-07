@@ -26,8 +26,9 @@ docker build --no-cache=true --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%
 ## Run
 
 ```
-docker run --rm -it wolffaxn/devops-kit ansible --version
-docker run --rm -it wolffaxn/devops-kit ansible-playbook --version
+docker run --rm -it wolffaxn/devops-kit ansible
+docker run --rm -it wolffaxn/devops-kit ansible-playbook
+docker run --rm -it wolffaxn/devops-kit ansible-lint
 ```
 
 ## License
