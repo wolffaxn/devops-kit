@@ -9,3 +9,5 @@ updates:
     # check for updates every weekday
     schedule:
       interval: "daily"
+    assignees:
+      - "wolffaxn"
