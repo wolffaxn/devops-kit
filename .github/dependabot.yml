@@ -1,0 +1,11 @@
+# set update schecdule for docker
+
+version: 2
+updates:
+  # enable version updates for docker
+  - package-ecosystem: "docker"
+    # look for a `Dockerfile`the root directory
+    directory: "/"
+    # check for updates every weekday
+    schedule:
+      interval: "daily"
