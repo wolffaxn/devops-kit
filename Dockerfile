@@ -10,6 +10,8 @@ ARG PACKER_VERSION
 ENV PACKER_VERSION=${PACKER_VERSION:-1.6.4}
 ARG TERRAFORM_VERSION
 ENV TERRAFORM_VERSION=${TERRAFORM_VERSION:-0.13.4}
+ARG TFLINT_VERSION
+ENV TFLINT_VERSION=${TFLINT_VERSION:-0.20.2}
 
 # metadata
 LABEL maintainer="Alexander Wolff <wolffaxn@gmail.com>" \
@@ -45,8 +47,15 @@ RUN set -ex \
   && unzip /tmp/terraform.zip -d /usr/bin \
   && rm -rf /tmp/*
 
+# tflint
+RUN set -ex \
+  && curl -Lso /tmp/tflint.zip https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip \
+  && unzip /tmp/tflint.zip -d /usr/bin \
+  && rm -rf /tmp/*
+
 #CMD ["ansible", "--version"]
 #CMD ["ansible-playbook", "--version"]
 #CMD ["ansible-lint", "--version"]
 #CMD ["packer", "version"]
 #CMD ["terraform", "version"]
+#CMD ["tflint", "-v"]

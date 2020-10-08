@@ -75,6 +75,14 @@ Terraform v0.13.4
 
 ```
 
+### Run tflint
+
+```
+❯ docker run --rm -it wolffaxn/devops-kit tflint -v
+TFLint version 0.20.2
+
+```
+
 ## License
 
 Released under the MIT License. See [license](LICENSE.md) for details.
