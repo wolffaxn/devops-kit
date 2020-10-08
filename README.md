@@ -12,7 +12,7 @@
 Run this command to build an image.
 
 ```
-docker build --no-cache=true --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t wolffaxn/devops-kit .
+docker build --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t wolffaxn/devops-kit .
 ```
 
 To enable BuildKit build set the DOCKER_BUILDKIT=1 environment variable when invoking the docker build command,
@@ -20,15 +20,59 @@ such as:
 
 ```
 export DOCKER_BUILDKIT=1
-docker build --no-cache=true --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t wolffaxn/devops-kit .
+docker build --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t wolffaxn/devops-kit .
 ```
 
 ## Run
 
+### Run ansible
+
 ```
-docker run --rm -it wolffaxn/devops-kit ansible
-docker run --rm -it wolffaxn/devops-kit ansible-playbook
-docker run --rm -it wolffaxn/devops-kit ansible-lint
+❯ docker run --rm -it wolffaxn/devops-kit ansible --version
+ansible 2.10.2
+  config file = None
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.9/site-packages/ansible
+  executable location = /usr/local/bin/ansible
+  python version = 3.9.0 (default, Oct  6 2020, 22:03:51) [GCC 8.3.0]
+
+```
+
+### Run ansible-playbook
+
+```
+❯ docker run --rm -it wolffaxn/devops-kit ansible-playbook --version
+ansible-playbook 2.10.2
+  config file = None
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.9/site-packages/ansible
+  executable location = /usr/local/bin/ansible-playbook
+  python version = 3.9.0 (default, Oct  6 2020, 22:03:51) [GCC 8.3.0]
+
+```
+
+### Run ansible-lint
+
+```
+❯ docker run --rm -it wolffaxn/devops-kit ansible-lint --version
+ansible-lint 4.3.5
+
+```
+
+### Run packer
+
+```
+❯ docker run --rm -it wolffaxn/devops-kit packer version
+Packer v1.6.4
+
+```
+
+### Run terraform
+
+```
+❯ docker run --rm -it wolffaxn/devops-kit terraform version
+Terraform v0.13.4
+
 ```
 
 ## License

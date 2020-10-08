@@ -6,6 +6,10 @@ ARG ANSIBLE_VERSION
 ENV ANSIBLE_VERSION=${ANSIBLE_VERSION:-2.10.0}
 ARG ANSIBLE_LINT_VERSION
 ENV ANSIBLE_LINT_VERSION=${ANSIBLE_LINT_VERSION:-4.3.5}
+ARG PACKER_VERSION
+ENV PACKER_VERSION=${PACKER_VERSION:-1.6.4}
+ARG TERRAFORM_VERSION
+ENV TERRAFORM_VERSION=${TERRAFORM_VERSION:-0.13.4}
 
 # metadata
 LABEL maintainer="Alexander Wolff <wolffaxn@gmail.com>" \
@@ -15,7 +19,9 @@ LABEL maintainer="Alexander Wolff <wolffaxn@gmail.com>" \
 RUN set -ex \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
+  curl \
   locales \
+  unzip \
   && rm -Rf /var/lib/apt/lists/* \
   && apt-get clean
 
@@ -27,6 +33,20 @@ RUN set -ex \
   && mkdir -p /etc/ansible \
   && echo '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
+# packer
+RUN set -ex \
+  && curl -Lso /tmp/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip \
+  && unzip /tmp/packer.zip -d /usr/bin \
+  && rm -rf /tmp/*
+
+# terraform
+RUN set -ex \
+  && curl -Lso /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+  && unzip /tmp/terraform.zip -d /usr/bin \
+  && rm -rf /tmp/*
+
 #CMD ["ansible", "--version"]
 #CMD ["ansible-playbook", "--version"]
 #CMD ["ansible-lint", "--version"]
+#CMD ["packer", "version"]
+#CMD ["terraform", "version"]
