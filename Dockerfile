@@ -18,9 +18,10 @@ LABEL maintainer="Alexander Wolff <wolffaxn@gmail.com>" \
   org.label-schema.build-date=${BUILD_DATE}
 
 # dependencies
-RUN set -ex \
+ENV DEBIAN_FRONTEND=noninteractive
+RUN set -eux \
   && apt-get update \
-  && apt-get install -y --no-install-recommends \
+  && apt-get install -qq --no-install-recommends \
   curl \
   locales \
   unzip \
@@ -28,7 +29,7 @@ RUN set -ex \
   && apt-get clean
 
 # ansible
-RUN set -ex \
+RUN set -eux \
   && locale-gen en_US.UTF-8 \
   && pip3 install --no-cache --upgrade pip \
   && pip3 install --no-cache --upgrade ansible==${ANSIBLE_VERSION} ansible-lint==${ANSIBLE_LINT_VERSION} \
@@ -36,19 +37,19 @@ RUN set -ex \
   && echo '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 # packer
-RUN set -ex \
+RUN set -eux \
   && curl -Lso /tmp/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip \
   && unzip /tmp/packer.zip -d /usr/bin \
   && rm -rf /tmp/*
 
 # terraform
-RUN set -ex \
+RUN set -eux \
   && curl -Lso /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
   && unzip /tmp/terraform.zip -d /usr/bin \
   && rm -rf /tmp/*
 
 # tflint
-RUN set -ex \
+RUN set -eux \
   && curl -Lso /tmp/tflint.zip https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip \
   && unzip /tmp/tflint.zip -d /usr/bin \
   && rm -rf /tmp/*
