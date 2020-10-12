@@ -10,7 +10,7 @@
 Run this command to build an image.
 
 ```
-docker build --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t wolffaxn/devops-kit .
+make
 ```
 
 To enable BuildKit build set the DOCKER_BUILDKIT=1 environment variable when invoking the docker build command,
@@ -18,7 +18,7 @@ such as:
 
 ```
 export DOCKER_BUILDKIT=1
-docker build --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t wolffaxn/devops-kit .
+make
 ```
 
 ## Run

@@ -1,6 +1,8 @@
 FROM python:3.9-slim
 
 ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_URL
 
 ARG ANSIBLE_VERSION
 ENV ANSIBLE_VERSION=${ANSIBLE_VERSION:-2.10.0}
@@ -15,7 +17,10 @@ ENV TFLINT_VERSION=${TFLINT_VERSION:-0.20.2}
 
 # metadata
 LABEL maintainer="Alexander Wolff <wolffaxn@gmail.com>" \
-  org.label-schema.build-date=${BUILD_DATE}
+  org.label-schema.build-date=${BUILD_DATE} \
+  org.label-schema.docker.dockerfile="/Dockerfile" \
+  org.label-schema.vcs-ref=${VCS_REF} \
+  org.label-schema.vcs-url=${VCS_URL}
 
 # dependencies
 ENV DEBIAN_FRONTEND=noninteractive
