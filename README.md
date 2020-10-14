@@ -60,7 +60,7 @@ ansible-lint 4.3.5
 ### Run packer
 
 ```
-❯ docker run --rm -it wolffaxn/devops-kit packer version
+❯ docker run --rm -it wolffaxn/devops-kit:0.9.0 packer version
 Packer v1.6.4
 
 ```
@@ -68,7 +68,7 @@ Packer v1.6.4
 ### Run terraform
 
 ```
-❯ docker run --rm -it wolffaxn/devops-kit terraform version
+❯ docker run --rm -it wolffaxn/devops-kit:0.9.0 terraform version
 Terraform v0.13.4
 
 ```
@@ -76,7 +76,7 @@ Terraform v0.13.4
 ### Run tflint
 
 ```
-❯ docker run --rm -it wolffaxn/devops-kit tflint -v
+❯ docker run --rm -it wolffaxn/devops-kit:0.9.0 tflint -v
 TFLint version 0.20.2
 
 ```
