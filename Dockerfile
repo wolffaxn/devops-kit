@@ -1,4 +1,4 @@
-FROM python:3.15.0a6-slim
+FROM python:3.15.0b1-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
